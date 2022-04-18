@@ -14,7 +14,7 @@ before_install:
 # @ Test 수행 -----
 # 생성된 테스트 이미지를 이용해 테스트 수행
 script:
-    - docker run -e CI=true johnahn/react-test-app npm test
+    - docker run -e CI=true achievedw/react-test-app npm test
 
 # @ 운영버전 이미지 빌드
 # 테스트 성공 시 프로젝트의 운영버전 이미지들을 빌드.
@@ -28,16 +28,15 @@ after_success:
     - docker push achievedw/docker-frontend
     - docker push achievedw/docker-backend
     - docker push achievedw/docker-nginx
+# deploy:
+#     provider: elasticbeanstalk
+#     region: "ap-northeast-2"
+#     app: "docker-fullstack-app"
+#     env: "DockerFullstackApp-env"
+#     bucket_name: elasticbeanstalk-ap-northeast-2-972153559337
+#     bucket_path: "docker-fullstack-app"
+#     on:
+#         branch: main
 
-deploy:
-    provider: elasticbeanstalk
-    region: "ap-northeast-2"
-    app: "docker-fullstack-app"
-    env: "DockerFullstackApp-env"
-    bucket_name: elasticbeanstalk-ap-northeast-2-972153559337
-    bucket_path: "docker-fullstack-app"
-    on:
-        branch: main
-
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_ACCESS_KEY
+#     access_key_id: $AWS_ACCESS_KEY
+#     secret_access_key: $AWS_SECRET_ACCESS_KEY
