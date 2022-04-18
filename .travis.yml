@@ -11,7 +11,7 @@ services:
 before_install:
     - docker build -t achievedw/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
-# @ Test 수행 ----
+# @ Test 수행 -----
 # 생성된 테스트 이미지를 이용해 테스트 수행
 script:
     - docker run -e CI=true johnahn/react-test-app npm test
